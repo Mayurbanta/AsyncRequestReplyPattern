@@ -1,13 +1,12 @@
-﻿using AsyncRequestReplyPattern.Infrastructure;
-using AsyncRequestReplyPattern.Mediatr.Notifications;
-using AsyncRequestReplyPattern.Services;
-using Microsoft.AspNetCore.Http;
+﻿using AsyncRequestReplyPattern.Services;
+using Core.Infrastructure;
+using Core.Mediatr.Notifications;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsyncRequestReplyPattern.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class OrderController 
+public class OrderController
     : ControllerBase
 {
     private readonly ILogger<OrderController> _logger;

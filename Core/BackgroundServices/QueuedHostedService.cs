@@ -1,9 +1,12 @@
-﻿using AsyncRequestReplyPattern.Infrastructure;
+﻿using Core.Infrastructure;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
-namespace AsyncRequestReplyPattern.BackgroundServices;
+namespace Core.BackgroundServices;
 
-public sealed class QueuedHostedService<T> 
+public sealed class QueuedHostedService<T>
     : BackgroundService
     where T : class, new()
 {

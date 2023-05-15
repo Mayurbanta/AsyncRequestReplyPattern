@@ -1,5 +1,5 @@
 ﻿using MediatR;
 
-namespace AsyncRequestReplyPattern.Mediatr.Notifications;
+namespace Core.Mediatr.Notifications;
 
 public record LongRunningJobNotification<T>(Guid JobId) : INotification;

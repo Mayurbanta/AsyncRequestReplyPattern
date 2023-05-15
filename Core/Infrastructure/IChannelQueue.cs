@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace AsyncRequestReplyPattern.Infrastructure;
+namespace Core.Infrastructure;
 
 public interface IChannelQueue<T> where T : class, new()
 {

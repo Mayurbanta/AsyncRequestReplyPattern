@@ -1,13 +1,13 @@
-﻿using AsyncRequestReplyPattern.Mediatr.Notifications;
-using AsyncRequestReplyPattern.Services;
+﻿using AsyncRequestReplyPattern.Services;
+using Core.Mediatr.Notifications;
 using MediatR;
 
 namespace AsyncRequestReplyPattern.Mediatr.Handlers;
 
-public class LongRunningJobHandler
+public class OrderJobHandler
     : INotificationHandler<LongRunningJobNotification<OrderService>>
 {
-    public LongRunningJobHandler()
+    public OrderJobHandler()
     {
 
     }

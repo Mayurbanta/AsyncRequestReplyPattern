@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using System.Threading.Channels;
 
-namespace AsyncRequestReplyPattern.Infrastructure;
+namespace Core.Infrastructure;
 
 public class ChannelQueue<T> : IChannelQueue<T> where T : class, new()
 {
@@ -17,5 +17,5 @@ public class ChannelQueue<T> : IChannelQueue<T> where T : class, new()
         return await _queue.Reader.ReadAsync(cancelToken);
     }
 
-    
+
 }

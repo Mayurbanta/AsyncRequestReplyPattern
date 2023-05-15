@@ -1,7 +1,7 @@
-
-using AsyncRequestReplyPattern.BackgroundServices;
-using AsyncRequestReplyPattern.Infrastructure;
 using AsyncRequestReplyPattern.Services;
+using Core;
+using Core.BackgroundServices;
+using Core.Infrastructure;
 
 namespace AsyncRequestReplyPattern;
 
@@ -27,7 +27,8 @@ public class Program
 
         builder.Services.AddMediatR(cfg =>
         {
-            cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly);
+            cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly, 
+                                                typeof(CoreBase).Assembly);
         });
 
 
