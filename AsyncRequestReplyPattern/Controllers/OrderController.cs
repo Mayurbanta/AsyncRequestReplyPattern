@@ -1,9 +1,9 @@
-﻿using AsyncRequestReplyPattern.Services;
-using Core.Infrastructure;
+﻿using Core.Infrastructure;
 using Core.Mediatr.Notifications;
 using Microsoft.AspNetCore.Mvc;
+using OrderWorker.Services;
 
-namespace AsyncRequestReplyPattern.Controllers;
+namespace OrderWorker.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 public class OrderController

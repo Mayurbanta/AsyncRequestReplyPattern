@@ -1,10 +1,10 @@
+
 using Core;
 using Core.BackgroundServices;
-using Core.Contracts;
 using Core.Infrastructure;
-using OrderWorker.Services;
+using TaxWorker.Services;
 
-namespace OrderWorker;
+namespace TaxWorker;
 
 public class Program
 {
@@ -21,8 +21,8 @@ public class Program
 
 
         //ref: https://www.kevinlloyd.net/in-memory-queue-with-mediatr/
-        builder.Services.ServiceBuilder<OrderService>();
-        builder.Services.AddTransient<IOrderService, OrderService>();
+        builder.Services.ServiceBuilder<TaxService>();
+        builder.Services.AddTransient<ITaxService, TaxService>();
 
         builder.Services.AddMediatR(cfg =>
         {
