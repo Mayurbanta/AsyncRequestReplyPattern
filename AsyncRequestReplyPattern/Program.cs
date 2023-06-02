@@ -2,6 +2,9 @@ using Core;
 using Core.BackgroundServices;
 using Core.Contracts;
 using Core.Infrastructure;
+using Core.Infrastructure.Rabbit;
+using Core.Mediatr.Notifications;
+using MediatR;
 using OrderWorker.Services;
 
 namespace OrderWorker;
@@ -21,8 +24,9 @@ public class Program
 
 
         //ref: https://www.kevinlloyd.net/in-memory-queue-with-mediatr/
-        builder.Services.ServiceBuilder<OrderService>();
+        builder.Services.ServiceBuilder<LongRunningJobNotification<IOrderService>>();
         builder.Services.AddTransient<IOrderService, OrderService>();
+        builder.Services.QueueBuilder<LongRunningJobNotification<IOrderService>>();
 
         builder.Services.AddMediatR(cfg =>
         {
@@ -44,7 +48,6 @@ public class Program
 
         app.UseAuthorization();
 
-
         app.MapControllers();
 
         app.Run();
@@ -53,14 +56,22 @@ public class Program
 
 public static class BuilderExtensions
 {
-    public static void ServiceBuilder<T>(this IServiceCollection services) where T : class, new()
+    public static void ServiceBuilder<T>(this IServiceCollection services) 
+        where T : class, INotification
     {
         if (services is null)
             throw new ArgumentNullException(nameof(services));
 
         services.AddHostedService<QueuedHostedService<T>>();
-        services.AddSingleton<IChannelQueue<T>, ChannelQueue<T>>();
-
+        //services.AddSingleton<IBaseQueue<T>, ChannelQueue<T>>();
+        
     }
 
+    public static void QueueBuilder<T>(this IServiceCollection services)
+        where T : class, INotification
+    {
+        services.AddSingleton<IBaseQueue<T>, RabbitQueue<T>>();
+        services.AddSingleton<IRabbitProducer, RabbitProducer>();
+        services.AddSingleton<IRabbitConsumer<T>, RabbitConsumer<T>>();
+    }
 }

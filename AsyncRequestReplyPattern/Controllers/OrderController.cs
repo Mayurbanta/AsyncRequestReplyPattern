@@ -10,20 +10,20 @@ public class OrderController
     : ControllerBase
 {
     private readonly ILogger<OrderController> _logger;
-    private readonly IChannelQueue<OrderService> _channelQueue;
+    private readonly IBaseQueue<LongRunningJobNotification<IOrderService>> _baseQueue;
 
     public OrderController(ILogger<OrderController> logger,
-        IChannelQueue<OrderService> channelQueue)
+        IBaseQueue<LongRunningJobNotification<IOrderService>> baseQueue)
     {
         _logger = logger;
-        _channelQueue = channelQueue;
+        _baseQueue = baseQueue;
     }
 
     [HttpPost("/api/orderrequest")]
     public async Task<IActionResult> ProcessOrder()
     {
         var jobId = Guid.NewGuid();
-        await _channelQueue.EnqueueAsync(new LongRunningJobNotification<OrderService>(jobId));
+        await _baseQueue.EnqueueAsync(new LongRunningJobNotification<IOrderService>(jobId));
         return Ok(jobId);
     }
 

@@ -59,7 +59,7 @@ public static class BuilderExtensions
             throw new ArgumentNullException(nameof(services));
 
         services.AddHostedService<QueuedHostedService<T>>();
-        services.AddSingleton<IChannelQueue<T>, ChannelQueue<T>>();
+        services.AddSingleton<IBaseQueue<T>, ChannelQueue<T>>();
 
     }
 

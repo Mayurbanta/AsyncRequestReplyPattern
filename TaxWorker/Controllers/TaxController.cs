@@ -10,8 +10,8 @@ namespace TaxWorker.Controllers;
 public class TaxController : ControllerBase
 {
     private readonly ILogger<TaxController> _logger;
-    private readonly IChannelQueue<TaxService> _channelQueue;
-    public TaxController(ILogger<TaxController> logger, IChannelQueue<TaxService> channelQueue)
+    private readonly IBaseQueue<TaxService> _channelQueue;
+    public TaxController(ILogger<TaxController> logger, IBaseQueue<TaxService> channelQueue)
 	{
         _logger = logger;
         _channelQueue = channelQueue;
